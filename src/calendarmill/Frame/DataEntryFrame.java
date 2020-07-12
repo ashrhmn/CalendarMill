@@ -181,6 +181,11 @@ public class DataEntryFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(itemTable);
 
         customRateCheckBox.setText("Custom Rate :");
+        customRateCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                customRateCheckBoxStateChanged(evt);
+            }
+        });
 
         rateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yard", "Meter" }));
 
@@ -479,6 +484,19 @@ public class DataEntryFrame extends javax.swing.JFrame {
             entryModel.addRow(rowdata);
         }
     }//GEN-LAST:event_addPurchaseEntryBtnActionPerformed
+
+    private void customRateCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_customRateCheckBoxStateChanged
+        // TODO add your handling code here:
+        System.out.println("Changed");
+        if(customRateCheckBox.isSelected()){
+            customRateField.setEditable(true);
+            rateComboBox.setEnabled(true);
+        }
+        else{
+            customRateField.setEditable(false);
+            rateComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_customRateCheckBoxStateChanged
 
     /**
      * @param args the command line arguments

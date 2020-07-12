@@ -430,6 +430,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Custom Rate :"/>
               </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="customRateCheckBoxStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="customRateField">
             </Component>
