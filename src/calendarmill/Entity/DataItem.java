@@ -16,17 +16,22 @@ public class DataItem {
     private Double amount;
     private Double payable;
     private Double taka;
+    private int type;
 
     public DataItem() {
     }
 
-    public DataItem(String date, String name, Double rate, Double amount, Double payable) {
+    public DataItem(String date, String name, Double rate, Double amount, Double payable, Double taka, int type) {
         this.date = date;
         this.name = name;
         this.rate = rate;
         this.amount = amount;
         this.payable = payable;
+        this.taka = taka;
+        this.type = type;
     }
+
+    
 
     public Double getPayable() {
         return payable;
@@ -75,4 +80,13 @@ public class DataItem {
     public void setTaka(Double taka) {
         this.taka = taka;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+    
 }

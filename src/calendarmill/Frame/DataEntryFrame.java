@@ -79,7 +79,7 @@ public class DataEntryFrame extends javax.swing.JFrame {
         addressField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dataTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         amountField = new javax.swing.JTextField();
         amountComboBox = new javax.swing.JComboBox<>();
@@ -137,7 +137,7 @@ public class DataEntryFrame extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Address :");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -153,8 +153,8 @@ public class DataEntryFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
+        dataTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(dataTable);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -439,6 +439,7 @@ public class DataEntryFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = itemTable.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) itemTable.getModel();
+        DefaultTableModel entryModel = (DefaultTableModel) dataTable.getModel();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Select an item first");
         } else {
@@ -475,7 +476,7 @@ public class DataEntryFrame extends javax.swing.JFrame {
             }
             
             Object[] rowdata = {itemName,amounty,amountm,ratey,ratem,amounty*ratey};
-            model.addRow(rowdata);
+            entryModel.addRow(rowdata);
         }
     }//GEN-LAST:event_addPurchaseEntryBtnActionPerformed
 
@@ -522,6 +523,7 @@ public class DataEntryFrame extends javax.swing.JFrame {
     private javax.swing.JTextField amountField;
     private javax.swing.JCheckBox customRateCheckBox;
     private javax.swing.JTextField customRateField;
+    private javax.swing.JTable dataTable;
     private javax.swing.JComboBox<String> entryTypeComboBox;
     private javax.swing.JTable itemTable;
     private javax.swing.JButton jButton1;
@@ -537,7 +539,6 @@ public class DataEntryFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

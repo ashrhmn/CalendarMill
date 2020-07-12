@@ -32,9 +32,9 @@ public class DataRepo {
         str.insert(7, '/');
         return str.toString();
     }
-    
-    public String dateEncode(String date){
-        return date.substring(0, 4)+date.substring(5,7)+date.substring(8,10);
+
+    public String dateEncode(String date) {
+        return date.substring(0, 4) + date.substring(5, 7) + date.substring(8, 10);
     }
 
     public ArrayList<DataItem> getDataByCustomer(String phone) {
@@ -51,7 +51,8 @@ public class DataRepo {
                 dataItem.setAmount(dbc.result.getDouble("amount"));
                 dataItem.setRate(dbc.result.getDouble("rate"));
                 dataItem.setTaka(dbc.result.getDouble("taka"));
-                    dataItem.setName(dbc.result.getString("item"));
+                dataItem.setName(dbc.result.getString("item"));
+                dataItem.setType(dbc.result.getInt("type"));
                 if (dbc.result.getInt("type") == 0) {
                     //payment
                     balance -= dbc.result.getDouble("taka");
