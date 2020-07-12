@@ -51,14 +51,13 @@ public class DataRepo {
                 dataItem.setAmount(dbc.result.getDouble("amount"));
                 dataItem.setRate(dbc.result.getDouble("rate"));
                 dataItem.setTaka(dbc.result.getDouble("taka"));
-                if (dbc.result.getString("item").equals("zzzzthisispayment")) {
+                    dataItem.setName(dbc.result.getString("item"));
+                if (dbc.result.getInt("type") == 0) {
                     //payment
                     balance -= dbc.result.getDouble("taka");
-                    dataItem.setName("Payment");
                 } else {
                     //purchase
                     balance += dbc.result.getDouble("taka");
-                    dataItem.setName(dbc.result.getString("item"));
                 }
                 dataItem.setPayable(balance);
                 dataItems.add(dataItem);
