@@ -7,6 +7,7 @@ package calendarmill.Frame;
 
 import calendarmill.Entity.Customer;
 import calendarmill.Entity.DataItem;
+import calendarmill.Repository.Conversions;
 import calendarmill.Repository.CustomerRepo;
 import calendarmill.Repository.DataRepo;
 import java.util.ArrayList;
@@ -26,45 +27,48 @@ public class ViewSelectedCustomerFrame extends javax.swing.JFrame {
     CustomerRepo cr;
     Customer customer;
     DataRepo dr;
-        ArrayList<DataItem> dataItems;
+    ArrayList<DataItem> dataItems;
+    Conversions conv;
+
     public ViewSelectedCustomerFrame(String phone) {
         initComponents();
         this.phone = phone;
-        
+
         detailsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
         cr = new CustomerRepo();
         customer = cr.getCustomer(phone);
-        
+
+        conv = new Conversions();
+
         dr = new DataRepo();
         dataItems = new ArrayList<>();
-        
+
         nameField.setText(customer.getName());
         addressField.setText(customer.getAddress());
         phoneField.setText(phone);
 
         updateTable();
-        
+
     }
-    
-    public void updateTable(){
+
+    public void updateTable() {
         dataItems.clear();
-        
+
         dataItems = dr.getDataByCustomer(phone);
-        
+
         DefaultTableModel model = (DefaultTableModel) detailsTable.getModel();
         model.setRowCount(0);
-        
-        for(int i=0;i<dataItems.size();++i){
+
+        for (int i = 0; i < dataItems.size(); ++i) {
             model.addRow(tableRowData(dataItems.get(i)));
         }
     }
-    
-    public Object[] tableRowData(DataItem dataItem){
-        Object[] rowData = {dataItem.getDate(),dataItem.getName(),dataItem.getRate(),dataItem.getAmount(),dataItem.getTaka(),dataItem.getPayable()};
+
+    public Object[] tableRowData(DataItem dataItem) {
+        Object[] rowData = {dataItem.getDate(), dataItem.getName(), dataItem.getAmount(), dataItem.getRate(), conv.convertAmountYardToMeter(dataItem.getAmount()), conv.convertRateYardToMeter(dataItem.getRate()), dataItem.getTaka(), dataItem.getPayable()};
         return rowData;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,11 +110,11 @@ public class ViewSelectedCustomerFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Date", "Name of Product", "Rate", "Amount", "Taka", "Payable"
+                "Date", "Name of Product", "Amount(yard)", "Rate/yard", "Amount(Meter)", "Rate/meter", "Taka", "Payable"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

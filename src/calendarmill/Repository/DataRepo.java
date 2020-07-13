@@ -42,7 +42,7 @@ public class DataRepo {
         dbc.openConnection();
         DataItem dataItem;
         try {
-            dbc.result = dbc.st.executeQuery("select *,(rate*amount) 'taka' from data where phone='" + phone + "' order by date,item asc");
+            dbc.result = dbc.st.executeQuery("select *,(rate*amount) 'taka' from data where phone='" + phone + "' order by date,type,item asc");
             Double balance = 0.0;
             while (dbc.result.next()) {
                 dataItem = new DataItem();
@@ -53,7 +53,7 @@ public class DataRepo {
                 dataItem.setTaka(dbc.result.getDouble("taka"));
                 dataItem.setName(dbc.result.getString("item"));
                 dataItem.setType(dbc.result.getInt("type"));
-                if (dbc.result.getInt("type") == 0) {
+                if (dbc.result.getInt("type") == 1) {
                     //payment
                     balance -= dbc.result.getDouble("taka");
                 } else {
